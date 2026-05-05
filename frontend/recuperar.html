@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Recuperar contraseña</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <img src="imagenes/logo.png" alt="Logo Agenda de Salud" class="logo">
+    
+    <h2>Recuperar Contraseña</h2>
+
+    <input type="email" id="correo" placeholder="Ingresa tu correo">
+
+    <button onclick="recuperar()">Enviar</button>
+
+    <a href="index.html">
+        <button>Volver</button>
+    </a>
+
+</div>
+
+
+
+<script>
+function recuperar() {
+    const correo = document.getElementById("correo").value;
+
+    if (!correo) {
+        alert("Ingresa tu correo");
+        return;
+    }
+
+    alert("Si el correo existe, recibirás instrucciones para recuperar tu contraseña");
+}
+</script>
+
+</body>
+</html>

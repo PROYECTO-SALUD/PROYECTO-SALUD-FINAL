@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Administración - Agenda Salud</title>
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body class="body-admin"> 
+
+<aside class="menu-lateral">
+    <h2>Agenda Salud</h2>
+    <nav>
+        <ul>
+            <li><a href="#panel">Panel</a></li>
+            <li><a href="#agenda">Agenda</a></li>
+            <li><a href="#citas">Gestión de Citas</a></li>
+            <li><a href="#pacientes">Pacientes</a></li>
+            <li><a href="#nueva-cita">Nueva Cita</a></li>
+            <li><a href="#" onclick="logout()">Cerrar Sesión</a></li> 
+        </ul>
+    </nav>
+</aside>
+
+<main class="contenido-principal">
+
+<header class="encabezado">
+    <h1>Panel de Administración</h1>
+    <div class="info-usuario">
+        <span id="adminNombre">Administrador</span>
+    </div>
+</header>
+
+<section class="panel-resumen" id="panel">
+    <div class="tarjeta">
+        <h3>Citas Hoy</h3>
+        <p id="totalCitas">0</p>
+    </div>
+    <div class="tarjeta">
+        <h3>Pacientes</h3>
+        <p>150</p>
+    </div>
+    <div class="tarjeta">
+        <h3>Doctores</h3>
+        <p>8</p>
+    </div>
+    <div class="tarjeta">
+        <h3>Ingresos</h3>
+        <p>$2.500.000</p>
+    </div>
+</section>
+
+<section class="seccion-agenda" id="agenda">
+    <h2>AGENDA DEL DÍA</h2>
+    <div class="calendario">
+        <div class="hora">08:00</div>
+        <div class="evento">Disponible</div>
+        <div class="hora">09:00</div>
+        <div class="evento">Disponible</div>
+        <div class="hora">10:00</div>
+        <div class="evento">Disponible</div>
+    </div>
+</section>
+
+<section class="gestion-citas" id="citas">
+    <h2>Gestión de Citas</h2>
+    <div class="contenedor-tabla">
+        <table>
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Paciente</th>
+                    <th>Doctor</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>10/04/2026</td>
+                    <td>10:00 AM</td>
+                    <td>Juan Pérez</td>
+                    <td>Dra. López</td>
+                    <td>Pendiente</td>
+                    <td>
+                        <button class="btn-editar">Editar</button>
+                        <button class="btn-eliminar">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="seccion-pacientes" id="pacientes">
+    <h2>Pacientes</h2>
+    <div class="caja-busqueda">
+        <input type="text" placeholder="Buscar paciente...">
+    </div>
+    <div class="contenedor-tabla">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Documento</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>María Gómez</td>
+                    <td>123456789</td>
+                    <td>3001234567</td>
+                    <td>maria@email.com</td>
+                    <td>
+                        <button class="btn-editar">Editar</button>
+                        <button class="btn-eliminar">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="seccion-formulario" id="nueva-cita">
+    <h2>Agendar Nueva Cita</h2>
+    <form onsubmit="crearCita(event)">
+        <input type="text" id="nombrePaciente" placeholder="Nombre del paciente" required>
+        <input type="date" id="fechaCita" required>
+        <input type="time" id="horaCita" required>
+        <input type="text" id="doctorCita" placeholder="Doctor" required>
+
+        <select id="estadoCita" required>
+            <option value="" disabled selected>Seleccione el estado...</option>
+            <option value="pendiente">Pendiente</option>
+            <option value="completada">Completada</option>
+            <option value="cancelada">Cancelada</option>
+        </select>
+
+        <button type="submit">Guardar Cita</button>
+    </form>
+</section>
+
+</main>
+
+<!-- 🔥 IMPORTANTE -->
+<script src="script.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+    if (!usuario) {
+        window.location.href = "index.html";
+        return;
+    }
+
+    document.getElementById("adminNombre").textContent = usuario.correo || "Administrador";
+
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="estilos.css">
+
+<!--- Libreria de Iconos Font Awesome --->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!--Fin Libreria de Iconos-->
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <img src="imagenes/logo.png" alt="Logo Agenda de Salud" class="logo">
+
+    <h1 class="titulo">BIENVENIDOS</h1>
+    
+    <input type="email" id="correo" placeholder="Correo">
+
+<!---------Ojito para ocultar o ver contraseña---------->
+    <div class="input-password">
+    <input type="password" id="password" placeholder="Contraseña">
+    <i class="fa-solid fa-eye toggle-password" onclick="togglePassword()"></i>
+</div>
+<!---------------- Fin ocultar ojito--------------->
+
+    <a href="recuperar.html" class="link">
+        ¿Olvidaste tu contraseña?
+    </a>
+
+    <button onclick="login()">Ingresar</button>
+
+    <a href="registro.html">
+        <button>Registrarse</button>
+    </a>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

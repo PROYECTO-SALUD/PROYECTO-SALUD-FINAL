@@ -1,0 +1,330 @@
+/* Reset */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fondo */
+body {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+         
+    background: 
+        linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)),
+        url("imagenes/fondo.jpg") no-repeat center center;
+
+    background-size: cover;
+}
+
+.titulo {
+    color: #000000;
+    margin-top: 10px;   /* reduce espacio arriba */
+    margin-bottom: 20px;
+}
+
+
+/* Contenedor (el cuadro) */
+.container {
+    position: relative;
+    top: 40px; /* 🔽 esto lo baja un poco */
+
+    width: 320px;
+    padding: 30px;
+    border-radius: 15px;
+
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+
+    text-align: center;
+    
+}
+
+/*Ojito para ver contraseña*/
+
+.input-password {
+    position:relative;
+    width: 100%;
+}
+
+.input-password input {
+    width: 100%;
+    padding: 10px;
+    padding-right: 40px; /* espacio para el ojito */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 13px;
+}
+
+/*LOGO*/
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* SOLO PARA EL PANEL */ /*¿ que hace esto?*/
+body.panel {
+    display: block;
+}
+
+/* ENCABEZADO */
+.encabezado-principal {
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.contenedor-principal {
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* SECCIONES */
+.seccion {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 15px;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* QUE LA ÚLTIMA OCUPE TODO EL ANCHO */
+.agregar-horario {
+    grid-column: span 2;
+}
+
+/* TITULOS */
+.seccion h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* TARJETAS */
+.tarjeta-cita1,
+.tarjeta-cita2 {
+    background: rgba(143, 199, 252, 0.3);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* LISTA */
+.lista-horarios {
+    list-style: none;
+}
+
+.lista-horarios li {
+    background: rgba(0,0,0,0.05);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+
+/* FORMULARIO */
+.formulario-horario {
+    display: flex;
+    flex-direction: column;
+}
+
+/* INPUT - ENTRADAS */
+input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    
+    background-color: #fff; /* fondo blanco */
+    color: #000; /* texto negro */
+}
+
+/* BOTÓN */
+button {
+    margin-top: 10px;
+    padding: 10px;
+
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+
+    border: none;
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+/* HOVER */
+button:hover {
+    opacity: 0.9;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .contenedor-principal {
+        grid-template-columns: 1fr;
+    }
+
+    .agregar-horario {
+        grid-column: span 1;
+    }
+}
+
+
+/* Título */
+h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Inputs */
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+
+    background-color: #fff;
+    color: #000;
+}
+
+/* placeholder para que el texto guía se vea negro  */
+input::placeholder {
+    color: #000;
+    opacity: 1;
+}
+
+/* Botón */
+button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/* Hover */
+button:hover {
+    opacity: 0.9;
+}
+
+/* Links */
+a {
+    display: block;
+    margin-top: 10px;
+    color: #2575fc;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+.info {
+    background: rgba(143, 199, 252, 0.39);
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+    text-align: left;
+}
+a {
+    text-decoration: none;
+}
+
+a button {
+    width: 100%;
+    margin-top: 10px;
+
+    /* PANEL MEDICO - ADAPTAR AL MISMO ESTILO */
+
+/* Hace que el contenido no se dañe con el fondo centrado */
+body {
+    display: block;
+}
+
+/* Encabezado */
+.encabezado-principal {
+    text-align: center;
+    color: white;
+    margin-top: 30px;
+}
+
+/* Contenedor como los cuadros */
+.contenedor-principal {
+    width: 320px;
+    margin: 20px auto;
+    padding: 25px;
+
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+
+    box-shadow: 0 15px 40<px rgba(0,0,0,0.3);
+}
+
+/* Secciones */
+.seccion {
+    margin-bottom: 20px;
+}
+
+/* Tarjetas */
+.tarjeta-cita1,
+.tarjeta-cita2 {
+    background: rgba(143, 199, 252, 0.3);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* Lista */
+.lista-horarios {
+    list-style: none;
+}
+
+.lista-horarios li {
+    background: rgba(0,0,0,0.05);
+    padding: 8px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+
+/* Formulario */
+.formulario-horario {
+    display: flex;
+    flex-direction: column;
+}

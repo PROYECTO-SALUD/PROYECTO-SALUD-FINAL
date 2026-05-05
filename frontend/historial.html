@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Historial Médico</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<div class="container">
+ 
+    <img src="imagenes/logo.png" alt="Logo Agenda de Salud" class="logo">
+
+    <h2>Mi Historial Médico</h2>
+
+    <input type="text" id="nombre" placeholder="Nombre">
+    <input type="text" id="idPaciente" placeholder="ID">
+    <input type="text" id="edad" placeholder="Edad">
+
+    <div class="info">
+        <p><strong>Especialidad:</strong> Medicina General</p>
+        <p><strong>Fecha:</strong> <span id="fecha"></span></p>
+        <p><strong>Médico:</strong> Dr. Camilo Andres Salcedo</p>
+        <p><strong>Estado de cita:</strong> Finalizada</p>
+    </div>
+
+    <div class="info">
+        <p><strong>Diagnóstico:</strong> Cuadro Viral</p>
+        <p><strong>Tratamiento:</strong> Dipirona Comprimidos 500mg/24h</p>
+        <p><strong>Observaciones:</strong> Paciente estable</p>
+    </div>
+
+    <a href="menu.html">
+        <button>Volver</button>
+    </a>
+
+</div>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const fecha = localStorage.getItem("fecha");
+    document.getElementById("fecha").textContent = fecha || "";
+});
+</script>
+
+</body>
+</html>
