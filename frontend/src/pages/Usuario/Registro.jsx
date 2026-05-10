@@ -2,6 +2,7 @@ import { useState } from "react"; // Permite guardar y actualizar los datos que 
 import { useNavigate } from "react-router-dom"; // Permite redirigir al usuario a la página de login después de registrarse
 import { Card } from "primereact/card"; //Se importa el componente Card de PrimeReact para crear una tarjeta de Registro
 import { InputText } from "primereact/inputtext"; // Formulario de texto para escribir datos como nombre, apellido, documento y correo.
+import { Password } from "primereact/password"; // Campo de contraseña con botón para mostrar u ocultar
 import { Button } from "primereact/button"; //Boton de registro
 
 import axios from "axios"; // Permite enviar los datos del registro al backend
@@ -14,9 +15,48 @@ const Registro = () => {
   const [documento, setDocumento] = useState('');
   const [correo, setCorreo] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmarPassword, setConfirmarPassword] = useState('');  // Estado para confirmar que la contraseña escrita sea igual
   
   const handleRegistro = async (e) => {
     e.preventDefault();
+
+  // Valida que todos los campos estén completos
+  if (!nombre || !apellido || !documento || !correo || !password  || !confirmarPassword) {
+      alert("Todos los campos son obligatorios");
+      return;
+    }
+
+// Validamos que el documento solo contenga números
+const documentoValido = /^[0-9]+$/;
+
+if (!documentoValido.test(documento)) {
+  alert("El documento solo debe contener números");
+  return;
+}
+
+// Validamos que el correo tenga un formato válido
+const correoValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if (!correoValido.test(correo)) {
+  alert("Ingresa un correo electrónico válido");
+  return;
+}
+
+  // Validamos que la contraseña sea segura: mínimo 6 caracteres, una mayúscula, una minúscula, un número y un carácter especial
+const passwordValida = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{6,}$/;
+    
+
+
+  if (!passwordValida.test(password)) {
+    alert("La contraseña debe tener mínimo 6 caracteres, una mayúscula, una minúscula, un número y un carácter especial");
+    return;
+}
+
+// Validamos que ambas contraseñas coincidan
+if (password !== confirmarPassword) {
+  alert("Las contraseñas no coinciden");
+  return;
+}
 
     try {
       const respuesta = await axios.post("http://localhost:3000/api/usuario", {
@@ -29,12 +69,14 @@ const Registro = () => {
       });
     
       console.log("Respuesta del backend:", respuesta.data);
-      alert("Usuario registrado correctamente");
+      alert("Registro Exitoso");
     } catch (error) {
       console.log("Error al registrar:", error.response?.data || error.message);
-      alert("Error al registrar usuario");
+      alert("Error al registrarse");
     }
   };
+
+
   return (
    //Contenedor principal de registro
     <div
@@ -44,11 +86,13 @@ const Registro = () => {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        height: '100vh',
+        minHeight: '100vh',
         width: '100vw',
         position: 'absolute',
         top: 0,
-        left: 0
+        left: 0,
+        padding: '2rem 0',
+        overflowY:'auto'
       }}
     >
 
@@ -137,19 +181,40 @@ const Registro = () => {
           />
         </div>
 
+        
         {/* Campo para escribir la contraseña del usuario */}
         <div className="flex flex-column gap-2">
           <label htmlFor="password" className="text-sm font-bold">
             Contraseña
           </label>
 
-          <InputText
+          <Password
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Contraseña"
-            type="password"
+            toggleMask
+            feedback={false}
             className="w-full"
+            inputClassName="w-full"
+          />
+        </div>
+
+        {/*Confirmacion de contraseña*/}
+        <div className="flex flex-column gap-2">
+          <label htmlFor="confirmarPassword" className="text-sm font-bold">
+            Confirmar contraseña
+          </label>
+
+          <Password
+            id="confirmarPassword"
+            value={confirmarPassword}
+            onChange={(e) => setConfirmarPassword(e.target.value)}
+            placeholder="Confirmar contraseña"
+            toggleMask
+            feedback={false}
+            className="w-full"
+            inputClassName="w-full"
           />
         </div>
 

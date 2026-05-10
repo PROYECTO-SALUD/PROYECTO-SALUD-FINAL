@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; //Sirve para cambiar de pagina desde codigo
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
@@ -73,7 +73,8 @@ return (
 
 
             <div className='flex flex-column gap-2 mt-2'>
-                <Button
+            
+            <Button
                 label='Ingresar'
                 onClick={handleLogin} 
                 className='w-full'
