@@ -12,9 +12,9 @@ const Medico = {
     // Crear un nuevo medico (INSERT)
     crear: async (datos) => {
         try {
-            const { id_usuario, id_especialista, numero_licencia, años_experiencia, estado } = datos;
-            const query = `INSERT INTO medico (id_usuario, id_especialista, numero_licencia, años_experiencia, estado) VALUES (?, ?, ?, ?, ?)`;
-            const [result] = await db.query(query, [id_usuario, id_especialista, numero_licencia, años_experiencia, estado]);
+            const { id_usuario, id_especialista, tarjeta_profesional, experiencia_clinica, estado } = datos;
+            const query = `INSERT INTO medico (id_usuario, id_especialista, tarjeta_profesional, experiencia_clinica, estado) VALUES (?, ?, ?, ?, ?)`;
+            const [result] = await db.query(query, [id_usuario, id_especialista, tarjeta_profesional, experiencia_clinica, estado]);
             return result;
         } catch (error) {
             throw error;
