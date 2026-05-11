@@ -5,6 +5,8 @@ import { InputText } from "primereact/inputtext"; // Formulario de texto para es
 import { Password } from "primereact/password"; // Campo de contraseña con botón para mostrar u ocultar
 import { Button } from "primereact/button"; //Boton de registro
 
+import { Dropdown } from "primereact/dropdown"; // Componente desplegable para seleccionar el tipo de documento
+
 import axios from "axios"; // Permite enviar los datos del registro al backend
 
 //Estados que guardan los datos del usuario
@@ -13,6 +15,15 @@ const Registro = () => {
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
   const [documento, setDocumento] = useState('');
+  const [tipoDocumento, setTipoDocumento] = useState(null);
+  const opcionesTipoDocumento = [
+    { label: 'Cédula de Ciudadania', value: 'cedula_de_ciudadania' },
+    { label: 'Tarjeta de identidad', value: 'tarjeta_identidad' },
+    { label: 'Pasaporte', value: 'pasaporte' },
+    { label: 'Cédula de extranjería', value: 'cedula_extranjeria' },
+    { label: 'Registro Civil', value: 'registro_civil' }
+  ];
+
   const [correo, setCorreo] = useState('');
   const [password, setPassword] = useState('');
   const [confirmarPassword, setConfirmarPassword] = useState('');  // Estado para confirmar que la contraseña escrita sea igual
@@ -21,11 +32,13 @@ const Registro = () => {
     e.preventDefault();
 
   // Valida que todos los campos estén completos
-  if (!nombre || !apellido || !documento || !correo || !password  || !confirmarPassword) {
+  if (!nombre || !apellido || !tipoDocumento || !documento || !correo || !password  || !confirmarPassword) 
+    {
       alert("Todos los campos son obligatorios");
       return;
     }
 
+    
 // Validamos que el documento solo contenga números
 const documentoValido = /^[0-9]+$/;
 
@@ -44,7 +57,7 @@ if (!correoValido.test(correo)) {
 
   // Validamos que la contraseña sea segura: mínimo 6 caracteres, una mayúscula, una minúscula, un número y un carácter especial
 const passwordValida = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{6,}$/;
-    
+
 
 
   if (!passwordValida.test(password)) {
@@ -59,9 +72,11 @@ if (password !== confirmarPassword) {
 }
 
     try {
+      console.log("tipo_documento:", tipoDocumento);
       const respuesta = await axios.post("http://localhost:3000/api/usuario", {
         nombre,
         apellido,
+        tipo_documento: tipoDocumento,
         documento,
         correo,
         password,
@@ -151,6 +166,25 @@ if (password !== confirmarPassword) {
           />
         </div>
 
+        {/* Campo para seleccionar el tipo de documento */}
+        <div className="flex flex-column gap-2">
+          <label htmlFor="tipoDocumento" className="text-sm font-bold">
+            Tipo de documento
+          </label>
+
+          <Dropdown
+            id="tipoDocumento"
+            value={tipoDocumento}
+            onChange={(e) => {
+              console.log("Valor seleccionado:", e.value);
+              setTipoDocumento(e.value);
+            }}
+            options={opcionesTipoDocumento}
+            placeholder="Seleccione tipo de documento"
+            className="w-full"
+          />
+        </div>
+        
         {/* Campo para escribir el documento del usuario */}
         <div className="flex flex-column gap-2">
           <label htmlFor="documento" className="text-sm font-bold">
