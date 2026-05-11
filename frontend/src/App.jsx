@@ -1,6 +1,9 @@
 import { BrowserRouter as Router, Routes,Route, Navigate } from 'react-router-dom';
 import Login from './pages/usuario/Login';
 import Registro from './pages/usuario/Registro';
+import Ayuda from './pages/Usuario/Ayuda';
+// Importamos la página de recuperar contraseña
+import RecuperarContrasena from './pages/Usuario/RecuperarContrasena';
 
 // Creamos componentes rapidos para probar que las rutas funcionen
 const AdminPanel = () => <div className='p-5'><h1>Panel de Administracion</h1><p>Bienvenido dueño del centro medico.</p></div>;
@@ -29,9 +32,14 @@ function App() {
         {/* RUTA: Registro Usuario*/}
         <Route path='/registro' element={<Registro />} />
 
+        {/* RUTA: Ayuda Usuario*/}
+        <Route path='/ayuda' element={<Ayuda />} />
+
+        {/* RUTA: Recuperar Contraseña */}
+        <Route path='/recuperar-contrasena' element={<RecuperarContrasena />} />
+
         {/* Siempre debe ir al final. REGLA DE SEGURIDAD: Si alguien escribe una ruta que no existe, lo mandamos al Login */}
         <Route path='*' element={<Navigate to='/login' />} />
-
 
       </Routes>
     </Router>

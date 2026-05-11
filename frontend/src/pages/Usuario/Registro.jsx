@@ -4,6 +4,7 @@ import { Card } from "primereact/card"; //Se importa el componente Card de Prime
 import { InputText } from "primereact/inputtext"; // Formulario de texto para escribir datos como nombre, apellido, documento y correo.
 import { Password } from "primereact/password"; // Campo de contraseña con botón para mostrar u ocultar
 import { Button } from "primereact/button"; //Boton de registro
+import BotonAyuda from '../../components/BotonAyuda';
 
 import { Dropdown } from "primereact/dropdown"; // Componente desplegable para seleccionar el tipo de documento
 
@@ -269,6 +270,9 @@ if (password !== confirmarPassword) {
       </form>
 
       </Card>
+
+      <BotonAyuda />
+
     </div>
   );
 };
