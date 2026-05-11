@@ -15,9 +15,9 @@ const User = {
 // Crear un usuario (para el registro)
 create: async (userData) => {
     try {
-        const { nombre, apellido, documento, correo, password, tipo_usuario } = userData;
-        const sql = 'INSERT INTO usuario (nombre, apellido, documento, correo, password, tipo_usuario) VALUES (?, ?, ?, ?, ?, ?)';
-        const [result] = await db. execute(sql, [nombre, apellido, documento, correo, password, tipo_usuario || 'paciente']);
+        const { nombre, apellido, tipo_documento, documento, correo, password, tipo_usuario } = userData;
+        const sql = 'INSERT INTO usuario (nombre, apellido, tipo_documento, documento, correo, password, tipo_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)';
+        const [result] = await db. execute(sql, [nombre, apellido, tipo_documento, documento, correo, password, tipo_usuario || 'paciente']);
         return result.insertId;
     } catch (error) {
        throw error;
