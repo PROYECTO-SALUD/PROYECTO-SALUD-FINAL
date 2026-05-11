@@ -4,6 +4,8 @@ import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
+import BotonAyuda from '../../components/BotonAyuda';
+
 import  axios  from 'axios';
 const Login = () => {
     const navigate = useNavigate(); //Prepara la funcion para enviar al usuario de Login a otra pagina
@@ -101,10 +103,20 @@ return (
 
             </div>
             <div className='text-center mt-2'>
-                <a href='#' className='text-xs no-underline text-primary font-bold'>¿Olvidaste tu contraseña?</a>
+            {/* Link para ir a la página de recuperar contraseña */}
+            {/* Link para ir a la página de recuperar contraseña */}
+                <span
+                    onClick={() => navigate('/recuperar-contrasena')}
+                    className='text-xs no-underline text-primary font-bold cursor-pointer'
+                >
+                    ¿Olvidaste tu contraseña?
+                </span>
             </div>
         </form>
     </Card>
+
+    <BotonAyuda />
+
     </div>
 );
 };
