@@ -5,6 +5,8 @@ const userController = require('../controllers/userController');
 router.get('/', userController.getAllUser);
 router.post('/', userController.createUser);
 router.post('/login', userController.loginUser);
+router.post('/recuperar-contrasena', userController.recuperarContrasena);
+router.post('/validar-codigo', userController.validarCodigoRecuperacion);
 // ruta para actualizar un usuario
 router.put('/:id', userController.updateUser);
 // ruta para eliminar un usuario
