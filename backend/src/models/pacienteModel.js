@@ -7,7 +7,7 @@ const Paciente = {
     },
     // Crear un nuevo paciente con tus columnas exactas
     crear: async (datos) => {
-        const { id_usuario, tipo_sangre, sexo, fecha_nacimiento, telefono,direccion, estado } = datos;
+        const { id_usuario, tipo_sangre, sexo, fecha_nacimiento, telefono, direccion, estado } = datos;
         const query = `INSERT INTO paciente (id_usuario, tipo_sangre, sexo, fecha_nacimiento, telefono, direccion, estado) VALUES (?, ?, ?, ?, ?, ?, ?)`;
         const [result] = await db.query(query, [id_usuario, tipo_sangre, sexo, fecha_nacimiento, telefono, direccion, estado]);
         return result;

@@ -5,6 +5,7 @@ import Ayuda from './pages/Usuario/Ayuda';
 import RecuperarContrasena from './pages/Usuario/RecuperarContrasena';
 import ValidarCodigo from './pages/Usuario/ValidarCodigo';
 import CambioContrasena from './pages/Usuario/CambioContrasena';
+import RegistroPaciente from './pages/Paciente/RegistroPaciente';
 
 // Creamos componentes rapidos para probar que las rutas funcionen
 const AdminPanel = () => <div className='p-5'><h1>Panel de Administracion</h1><p>Bienvenido dueño del centro medico.</p></div>;
@@ -42,6 +43,8 @@ function App() {
         <Route path='/validar-codigo' element={<ValidarCodigo />} />
         {/* Ruta para cambiar la contraseña */}
         <Route path='/cambio-contrasena' element={<CambioContrasena />} />
+        {/* Ruta para completar datos del paciente*/}
+        <Route path='/registro-paciente' element={<RegistroPaciente />} />
 
         {/* Siempre debe ir al final. REGLA DE SEGURIDAD: Si alguien escribe una ruta que no existe, lo mandamos al Login */}
         <Route path='*' element={<Navigate to='/login' />} />

@@ -17,12 +17,17 @@ const Registro = () => {
   const [apellido, setApellido] = useState('');
   const [documento, setDocumento] = useState('');
   const [tipoDocumento, setTipoDocumento] = useState(null);
+  const [tipoUsuario, setTipoUsuario] = useState(null);
   const opcionesTipoDocumento = [
     { label: 'Cédula de Ciudadania', value: 'cedula_de_ciudadania' },
     { label: 'Tarjeta de identidad', value: 'tarjeta_identidad' },
     { label: 'Pasaporte', value: 'pasaporte' },
     { label: 'Cédula de extranjería', value: 'cedula_extranjeria' },
     { label: 'Registro Civil', value: 'registro_civil' }
+  ];
+  const opcionesTipoUsuario = [
+    { label: 'Paciente', value: 'paciente' },
+    { label: 'Medico', value: 'medico' }
   ];
 
   const [correo, setCorreo] = useState('');
@@ -33,7 +38,7 @@ const Registro = () => {
     e.preventDefault();
 
   // Valida que todos los campos estén completos
-  if (!nombre || !apellido || !tipoDocumento || !documento || !correo || !password  || !confirmarPassword) 
+  if (!nombre || !apellido || !tipoDocumento || !documento || !correo || !password  || !confirmarPassword || !tipoUsuario) 
     {
       alert("Todos los campos son obligatorios");
       return;
@@ -81,12 +86,18 @@ if (password !== confirmarPassword) {
         documento,
         correo,
         password,
-        tipo_usuario: "paciente"
+        tipo_usuario: tipoUsuario
       });
     
       console.log("Respuesta del backend:", respuesta.data);
       alert("Registro Exitoso");
-    } catch (error) {
+      if (tipoUsuario === 'paciente') {
+        navigate('/registro-paciente', { state: { usuarioId: respuesta.data.id_usuario } });
+      } else if (tipoUsuario === 'medico') {
+        navigate('/registro-medico');
+      }
+
+     } catch (error) {
       console.log("Error al registrar:", error.response?.data || error.message);
       alert("Error al registrarse");
     }
@@ -251,6 +262,19 @@ if (password !== confirmarPassword) {
             className="w-full"
             inputClassName="w-full"
           />
+        </div>
+        <div className="flex flex-column gap-2 mt-3">
+           <label htmlFor="tipoUsuario" className="text-sm font-bold">
+             Tipo Usuario
+           </label>
+           <Dropdown
+           id="tipoUsuario"
+           value={tipoUsuario}
+           options={opcionesTipoUsuario}
+           onChange={(e) => setTipoUsuario(e.value)}
+           placeholder="Seleccione su rol"
+           className="w-full" />
+
         </div>
 
         {/* Botón de registro */}
