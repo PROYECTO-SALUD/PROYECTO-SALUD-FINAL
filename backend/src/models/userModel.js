@@ -4,11 +4,54 @@ const User = {
     findByEmail: async (correo) => {
         try {
             //Usamos "usuario" en singular porque asi aparece en phpMyAdmin
-            const [rows] = await db.execute('SELECT *FROM usuario WHERE correo = ?', [correo]);
+            const [rows] = await db.execute('SELECT * FROM usuario WHERE correo = ?', [correo]);
             return rows[0];
-         } catch (error) {
+        } catch (error) {
                 console.error('Error en findByEmail:', error.message);
                 throw error;
+        }
+    },
+
+    // Guardar el código de recuperación en el usuario
+    guardarCodigoRecuperacion: async (correo, codigoRecuperacion) => {
+        try {
+            const sql = 'UPDATE usuario SET codigo_recuperacion = ? WHERE correo = ?';
+            const [result] = await db.execute(sql, [codigoRecuperacion, correo]);
+            return result;
+        } catch (error) {
+            console.error('Error en guardarCodigoRecuperacion:', error.message);
+            throw error;
+        }
+    },
+
+    // Buscar usuario por código de recuperación
+    findByCodigoRecuperacion: async (codigo) => {
+        
+        try {
+            const sql = 'SELECT * FROM usuario WHERE codigo_recuperacion = ?';
+            const [rows] = await db.execute(sql, [codigo]);
+            return rows[0];
+        } catch (error) {
+            console.error('Error en findByCodigoRecuperacion:', error.message);
+            throw error;
+        }
+    },
+
+    // Actualizar contraseña usando el código de recuperación
+    cambiarContrasenaPorCodigo: async (codigo, nuevaContrasena) => {
+        try {
+            const sql = `
+                UPDATE usuario
+                SET password = ?, codigo_recuperacion = NULL
+                WHERE codigo_recuperacion = ?
+            `;
+
+            const [result] = await db.execute(sql, [nuevaContrasena, codigo]);
+            return result;
+
+        } catch (error) {
+            console.error('Error en cambiarContrasenaPorCodigo:', error.message);
+            throw error;
         }
     },
 
@@ -20,9 +63,10 @@ create: async (userData) => {
         const [result] = await db. execute(sql, [nombre, apellido, tipo_documento, documento, correo, password, tipo_usuario || 'paciente']);
         return result.insertId;
     } catch (error) {
-       throw error;
+        throw error;
     }
 },
+
 // Obtener todos los usuarios
 findAll: async () => {
     try {
@@ -34,6 +78,7 @@ findAll: async () => {
     }
 },
 
+//Actualizar usuario
     update: async (id, userData) => {
         try {
             const query = 'UPDATE usuario SET ? WHERE id_usuario = ?';
@@ -43,6 +88,8 @@ findAll: async () => {
             throw error;
         }
     },
+
+//Eliminar usuario
     delete: async (id) => {
         try {
             const [result] = await db.query('DELETE FROM usuario WHERE id_usuario = ?', [id]);

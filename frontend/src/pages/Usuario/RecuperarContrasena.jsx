@@ -6,13 +6,15 @@ import { Card } from 'primereact/card';
 import BotonAyuda from '../../components/BotonAyuda';
 import axios from 'axios';
 
-const RecuperarContrasena = () => {
-    
+
+    const RecuperarContrasena = () => {
+
     // Estado para guardar el correo escrito por el usuario
     const [correo, setCorreo] = useState('');
-    
+
+    const navigate = useNavigate();
 // Función asíncrona para enviar la solicitud al backend (espere la respuesta del backen antes de continuar)
-const handleRecuperarContrasena = async (e) => {
+    const handleRecuperarContrasena = async (e) => {
     e.preventDefault();
 
     if (!correo.trim()) {
@@ -28,9 +30,10 @@ const handleRecuperarContrasena = async (e) => {
     
         // Si el backend responde correctamente, mostramos mensaje de éxito
         if (respuesta.status === 200) {
-            alert('Solicitud de recuperación enviada. Revisa tu correo electrónico.');
+            alert('Su correo a sido confirmado. Se ha enviado un código de recuperación a tu correo');
+            navigate('/validar-codigo');
         }
-    
+        
     } catch (error) {
         // Si ocurre un error, lo mostramos en consola
         console.log('Error al recuperar contraseña:', error.response?.data || error.message);
@@ -40,7 +43,6 @@ const handleRecuperarContrasena = async (e) => {
     }
 };
 
-    const navigate = useNavigate();
         return (
             // Contenedor principal de la página
             <div
@@ -108,7 +110,7 @@ const handleRecuperarContrasena = async (e) => {
         <Button
         type='submit'
         label='Recuperar'
-        className='w-full mt-2-btn-principal p-button-sm'
+        className='w-full mt-2 btn-principal p-button-sm'
         />
 
         </form>

@@ -137,7 +137,7 @@ if (password !== confirmarPassword) {
     </div>
 
     {/*Formulario de registro*/}
-      <form onSubmit={handleRegistro} className="flex flex-column gap-3">
+      <form onSubmit={handleRegistro} className="flex flex-column gap-3 ">
         <div className="flex flex-column gap-2">
           <label htmlFor="nombre" className="text-sm font-bold">
             Nombre

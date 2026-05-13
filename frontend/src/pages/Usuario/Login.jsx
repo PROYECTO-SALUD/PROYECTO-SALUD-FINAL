@@ -6,6 +6,7 @@ import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import BotonAyuda from '../../components/BotonAyuda';
 
+
 import  axios  from 'axios';
 const Login = () => {
     const navigate = useNavigate(); //Prepara la funcion para enviar al usuario de Login a otra pagina
@@ -60,15 +61,18 @@ return (
                     id='email'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder='usuario @correo.com'
-                    className='w-full'
+                    placeholder='usuario@correo.com'
+                    className='w-full p-inputtext-sm'
                 />
             </div>
             
             <div className='flex flex-column gap-2'>
-                <label htmlFor='password'title='Contraseña' className='text-sm font-bold'>Contraseña</label>
+                <label htmlFor='password'title='Contraseña' className='text-sm font-bold'> Contraseña</label>
                     <Password id='password' value={password} onChange={(e) => setPassword(e.target.value)}
-                    toggleMask feedback={false} className='w-full' inputClassName='w-full p-inputtext-sm' 
+                    toggleMask feedback={false}
+                    className='w-full'
+                    inputClassName='w-full p-inputtext-sm'
+                    placeholder='Contraseña'
                 />
             </div>
 
@@ -116,7 +120,6 @@ return (
     </Card>
 
     <BotonAyuda />
-
     </div>
 );
 };
