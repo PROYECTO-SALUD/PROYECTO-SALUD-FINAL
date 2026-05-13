@@ -1,3 +1,4 @@
+
 import { BrowserRouter as Router, Routes,Route, Navigate } from 'react-router-dom';
 import Login from './pages/usuario/Login';
 import Registro from './pages/usuario/Registro';
@@ -5,6 +6,10 @@ import Ayuda from './pages/Usuario/Ayuda';
 import RecuperarContrasena from './pages/Usuario/RecuperarContrasena';
 import ValidarCodigo from './pages/Usuario/ValidarCodigo';
 import CambioContrasena from './pages/Usuario/CambioContrasena';
+
+
+import Accesibilidad from './components/Accesibilidad';
+import BotonAyuda from './components/BotonAyuda';
 
 // Creamos componentes rapidos para probar que las rutas funcionen
 const AdminPanel = () => <div className='p-5'><h1>Panel de Administracion</h1><p>Bienvenido dueño del centro medico.</p></div>;
@@ -14,6 +19,8 @@ const PacientePanel = () => <div className='p-5'><h1>Panel del Paciente</h1><p>A
 function App() {
   return (
     <Router>
+      <BotonAyuda />
+      <Accesibilidad />
       <Routes>
         {/* RUTA 1: El inicio. Todo el que llegue entra por el Login */}
         <Route path='/' element={<Login />} />
@@ -41,8 +48,10 @@ function App() {
         {/* Ruta para validar el código de recuperación */}
         <Route path='/validar-codigo' element={<ValidarCodigo />} />
         {/* Ruta para cambiar la contraseña */}
-        <Route path='/cambio-contrasena' element={<CambioContrasena />} />
+        <Route path='/cambiar-contrasena' element={<CambioContrasena />} />
 
+        <Route path='/accesibilidad' element={<Accesibilidad />} />
+      
         {/* Siempre debe ir al final. REGLA DE SEGURIDAD: Si alguien escribe una ruta que no existe, lo mandamos al Login */}
         <Route path='*' element={<Navigate to='/login' />} />
 

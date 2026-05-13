@@ -1,0 +1,187 @@
+.panel-accesibilidad {
+
+    position: fixed;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    z-index: 1000;
+}
+
+/* BOTONES */
+.panel-accesibilidad button {
+
+    width: 50px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    overflow: hidden;
+    border: none;
+    border-radius: 10px;
+    background: #004884;
+    color: white;
+    padding: 0 15px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* TEXTO OCULTO */
+.panel-accesibilidad .texto {
+
+    opacity: 0;
+    white-space: nowrap;
+    font-size: 14px;
+    transition: opacity 0.3s ease;
+}
+
+/* HOVER */
+.panel-accesibilidad button:hover {
+
+    width: 200px;
+    background: #004884;
+}
+
+/* MOSTRAR TEXTO EN HOVER */
+.panel-accesibilidad button:hover .texto {
+
+    opacity: 1;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* =========================================
+   MODO ALTO CONTRASTE
+========================================= */
+
+/* FONDO GENERAL */
+.contraste-activo,
+.contraste-activo * {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+/* CONTENEDOR PRINCIPAL */
+body.contraste-activo .container {
+
+    background: #111;
+    border: 2px solid yellow;
+    box-shadow: none;
+}
+
+
+/* TITULOS */
+body.contraste-activo h2 {
+
+    color: yellow;
+}
+
+
+/* INPUTS */
+body.contraste-activo input {
+
+    background: #222;
+    color: yellow;
+    border: 2px solid yellow;
+}
+
+
+/* PLACEHOLDER */
+body.contraste-activo input::placeholder {
+
+    color: yellow;
+}
+
+
+/* BOTONES DEL FORMULARIO */
+body.contraste-activo .container button {
+
+    background: black;
+    color: yellow;
+    border: 2px solid yellow;
+}
+
+
+/* HOVER BOTONES */
+body.contraste-activo .container button:hover {
+
+    background: #222;
+}
+
+
+/* BOTONES PANEL ACCESIBILIDAD */
+body.contraste-activo .panel-accesibilidad button {
+
+    background: black;
+    color: yellow;
+    border: 2px solid yellow;
+}
+
+
+/* HOVER PANEL */
+body.contraste-activo .panel-accesibilidad button:hover {
+
+    background: #222;
+}
+/* =========================================
+   AUMENTAR LETRA
+========================================= */
+
+body.letra-grande {
+
+    font-size: 20px;
+}
+
+
+/* INPUTS MÁS GRANDES */
+body.letra-grande input {
+
+    font-size: 18px;
+}
+
+
+/* BOTONES MÁS GRANDES */
+body.letra-grande button {
+
+    font-size: 18px;
+}
+
+
+/* TITULOS MÁS GRANDES */
+body.letra-grande h2 {
+
+    font-size: 32px;
+}
+
+/* =========================================
+   LETRA EXTRA GRANDE
+========================================= */
+
+body.letra-extra-grande {
+
+    font-size: 24px;
+}
+
+
+/* TITULOS */
+body.letra-extra-grande h2 {
+
+    font-size: 40px;
+}
+
+
+/* INPUTS */
+body.letra-extra-grande input {
+
+    font-size: 22px;
+}
+
+
+/* BOTONES */
+body.letra-extra-grande button {
+
+    font-size: 22px;
+}

@@ -4,7 +4,7 @@ const User = {
     findByEmail: async (correo) => {
         try {
             //Usamos "usuario" en singular porque asi aparece en phpMyAdmin
-            const [rows] = await db.execute('SELECT *FROM usuario WHERE correo = ?', [correo]);
+            const [rows] = await db.execute('SELECT * FROM usuario WHERE correo = ?', [correo]);
             return rows[0];
         } catch (error) {
                 console.error('Error en findByEmail:', error.message);
@@ -26,12 +26,31 @@ const User = {
 
     // Buscar usuario por código de recuperación
     findByCodigoRecuperacion: async (codigo) => {
+        
         try {
             const sql = 'SELECT * FROM usuario WHERE codigo_recuperacion = ?';
             const [rows] = await db.execute(sql, [codigo]);
             return rows[0];
         } catch (error) {
             console.error('Error en findByCodigoRecuperacion:', error.message);
+            throw error;
+        }
+    },
+
+    // Actualizar contraseña usando el código de recuperación
+    cambiarContrasenaPorCodigo: async (codigo, nuevaContrasena) => {
+        try {
+            const sql = `
+                UPDATE usuario
+                SET password = ?, codigo_recuperacion = NULL
+                WHERE codigo_recuperacion = ?
+            `;
+
+            const [result] = await db.execute(sql, [nuevaContrasena, codigo]);
+            return result;
+
+        } catch (error) {
+            console.error('Error en cambiarContrasenaPorCodigo:', error.message);
             throw error;
         }
     },

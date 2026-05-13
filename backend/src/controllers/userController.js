@@ -132,11 +132,59 @@ validarCodigoRecuperacion = async (req, res) => {
     }
 };
 
+// Cambiar contraseña usando el código de recuperación
+cambiarContrasena = async (req, res) => {
+    try {
+        // Obtenemos el código y la nueva contraseña desde el frontend
+        const { codigo, nuevaContrasena } = req.body;
+
+        // Validamos que llegue el código
+        if (!codigo) {
+            return res.status(400).json({
+                mensaje: "El código de recuperación es obligatorio"
+            });
+        }
+
+        // Validamos que llegue la nueva contraseña
+        if (!nuevaContrasena) {
+            return res.status(400).json({
+                mensaje: "La nueva contraseña es obligatoria"
+            });
+        }
+
+        // Buscamos si existe un usuario con ese código
+        const user = await User.findByCodigoRecuperacion(codigo);
+
+        // Si no existe
+        if (!user) {
+            return res.status(404).json({
+                mensaje: "Código inválido o vencido"
+            });
+        }
+
+        // Actualizamos la contraseña usando el código
+        await User.cambiarContrasenaPorCodigo(codigo, nuevaContrasena);
+
+        // Respondemos éxito
+        return res.status(200).json({
+            mensaje: "Contraseña actualizada correctamente"
+        });
+
+    } catch (error) {
+        console.error(error);
+
+        return res.status(500).json({
+            error: "Error en el servidor al cambiar contraseña"
+        });
+    }
+};
+
 // Exportacion para las rutas
 module.exports = {
     loginUser,
     recuperarContrasena,
     validarCodigoRecuperacion,
+    cambiarContrasena,
     getAllUser,
     createUser,
     updateUser,

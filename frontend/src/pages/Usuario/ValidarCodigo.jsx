@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
@@ -9,6 +10,8 @@ import axios from 'axios';
 const ValidarCodigo = () => {
 // Estado para guardar el código escrito por el usuario
 const [codigo, setCodigo] = useState('');
+// Preparamos la navegación entre páginas
+const navigate = useNavigate();
 
 // Función asíncrona para validar el código en el backend
 const handleValidarCodigo = async (e) => {
@@ -29,9 +32,14 @@ const handleValidarCodigo = async (e) => {
     
         // Si el backend responde correctamente
         if (respuesta.status === 200) {
+            // Guardamos temporalmente el código validado
+            localStorage.setItem('codigoRecuperacion', codigo);
+        
             alert('Código validado correctamente.');
+        
+            // Enviamos al usuario a cambiar contraseña
+            navigate('/cambiar-contrasena');
         }
-    
     } catch (error) {
         // Mostramos el error en consola para revisar detalles
         console.log('Error al validar código:', error.response?.data || error.message);
