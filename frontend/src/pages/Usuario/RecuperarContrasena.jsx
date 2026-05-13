@@ -28,7 +28,7 @@ const handleRecuperarContrasena = async (e) => {
     
         // Si el backend responde correctamente, mostramos mensaje de éxito
         if (respuesta.status === 200) {
-            alert('Solicitud de recuperación enviada. Revisa tu correo electrónico.');
+            alert('Su correo a sid confirmado. Se ha enviado un código de recuperación a tu correo');
         }
     
     } catch (error) {
