@@ -94,7 +94,7 @@ if (password !== confirmarPassword) {
       if (tipoUsuario === 'paciente') {
         navigate('/registro-paciente', { state: { usuarioId: respuesta.data.id_usuario } });
       } else if (tipoUsuario === 'medico') {
-        navigate('/registro-medico');
+        navigate('/registro-medico', { state: { datosUsuario:{ id_usuario: respuesta.data.id_usuario, nombre: nombre } } });
       }
 
      } catch (error) {
@@ -114,19 +114,16 @@ if (password !== confirmarPassword) {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         minHeight: '100vh',
-        width: '100vw',
-        position: 'absolute',
-        top: 0,
-        left: 0,
         padding: '2rem 0',
-        overflowY:'auto'
+        overflow: 'auto'
       }}
     >
 
       <Card
-      className="shadow-8"
+      className="shadow-8 w-full md:w-25rem"
       style= {{
-        width: '26rem',
+        width: '360px',
+        margin: '0 auto',
         borderRadius: '15px',
         backgroundColor: 'rgba(255, 255, 255, 0.92)'
       }}

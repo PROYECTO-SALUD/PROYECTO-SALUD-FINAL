@@ -1,0 +1,53 @@
+/* Contenedor principal y centrar container*/
+.fondo-pagina-medico {
+    background: url('/imagenes/fondo.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Tarjeta del formulario */
+.tarjeta-registro-medico {
+    width: 100%;
+    max-width: 320px;
+    border-radius: 12px;
+    padding: 1.5rem 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.8);
+    box-sizing: border-box;
+}
+/* Logo del Contenedor*/
+.logo-agenda-salud {
+    display: block;
+    margin: 0 auto 0.8rem auto;
+    max-width: 130px;
+    height: auto;
+}
+/* Titulo medico*/
+.totulo-medico {
+    color: #1a2530;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 0.25rem;
+}
+/* Boton "Ingresar" */
+.boton-azul-medico {
+    background-color: #a8e6cf;
+    color: #1a2530;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+    width: 100%;
+    margin-top: 15px;
+    transition: background-color 0.2s ease;
+}
+.boton-azul-medico:hover {
+    background-color: #96d1bc;
+}
