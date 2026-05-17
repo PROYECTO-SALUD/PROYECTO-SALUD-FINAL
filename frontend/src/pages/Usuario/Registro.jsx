@@ -17,12 +17,17 @@ const Registro = () => {
   const [apellido, setApellido] = useState('');
   const [documento, setDocumento] = useState('');
   const [tipoDocumento, setTipoDocumento] = useState(null);
+  const [tipoUsuario, setTipoUsuario] = useState(null);
   const opcionesTipoDocumento = [
     { label: 'Cédula de Ciudadania', value: 'cedula_de_ciudadania' },
     { label: 'Tarjeta de identidad', value: 'tarjeta_identidad' },
     { label: 'Pasaporte', value: 'pasaporte' },
     { label: 'Cédula de extranjería', value: 'cedula_extranjeria' },
     { label: 'Registro Civil', value: 'registro_civil' }
+  ];
+  const opcionesTipoUsuario = [
+    { label: 'Paciente', value: 'paciente' },
+    { label: 'Medico', value: 'medico' }
   ];
 
   const [correo, setCorreo] = useState('');
@@ -33,7 +38,7 @@ const Registro = () => {
     e.preventDefault();
 
   // Valida que todos los campos estén completos
-  if (!nombre || !apellido || !tipoDocumento || !documento || !correo || !password  || !confirmarPassword) 
+  if (!nombre || !apellido || !tipoDocumento || !documento || !correo || !password  || !confirmarPassword || !tipoUsuario) 
     {
       alert("Todos los campos son obligatorios");
       return;
@@ -81,12 +86,18 @@ if (password !== confirmarPassword) {
         documento,
         correo,
         password,
-        tipo_usuario: "paciente"
+        tipo_usuario: tipoUsuario
       });
     
       console.log("Respuesta del backend:", respuesta.data);
       alert("Registro Exitoso");
-    } catch (error) {
+      if (tipoUsuario === 'paciente') {
+        navigate('/registro-paciente', { state: { usuarioId: respuesta.data.id_usuario } });
+      } else if (tipoUsuario === 'medico') {
+        navigate('/registro-medico', { state: { datosUsuario:{ id_usuario: respuesta.data.id_usuario, nombre: nombre } } });
+      }
+
+     } catch (error) {
       console.log("Error al registrar:", error.response?.data || error.message);
       alert("Error al registrarse");
     }
@@ -103,19 +114,16 @@ if (password !== confirmarPassword) {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         minHeight: '100vh',
-        width: '100vw',
-        position: 'absolute',
-        top: 0,
-        left: 0,
         padding: '2rem 0',
-        overflowY:'auto'
+        overflow: 'auto'
       }}
     >
 
       <Card
-      className="shadow-8"
+      className="shadow-8 w-full md:w-25rem"
       style= {{
-        width: '26rem',
+        width: '360px',
+        margin: '0 auto',
         borderRadius: '15px',
         backgroundColor: 'rgba(255, 255, 255, 0.92)'
       }}
@@ -251,6 +259,19 @@ if (password !== confirmarPassword) {
             className="w-full"
             inputClassName="w-full"
           />
+        </div>
+        <div className="flex flex-column gap-2 mt-3">
+           <label htmlFor="tipoUsuario" className="text-sm font-bold">
+             Tipo Usuario
+           </label>
+           <Dropdown
+           id="tipoUsuario"
+           value={tipoUsuario}
+           options={opcionesTipoUsuario}
+           onChange={(e) => setTipoUsuario(e.value)}
+           placeholder="Seleccione su rol"
+           className="w-full" />
+
         </div>
 
         {/* Botón de registro */}

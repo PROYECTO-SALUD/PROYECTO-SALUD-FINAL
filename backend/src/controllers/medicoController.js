@@ -9,13 +9,20 @@ exports.getAllMedicos = async (req, res) => {
         }
 };
         
-// Crear un nuevo medico
+// Crear un nuevo medico con registro multiple
 exports.createMedico =  async (req, res) => {
+   //console.log("=== datos que recibe el backend ===", require.body);
     try{
-    const result = await Medico.crear(req.body);
-        res.status(201).json({ mensaje: '¡Medico guardado con exito!', id: result.insertId });
+        const result = await Medico.crear(req.body);
+            return res.status(201).json({
+                mensaje: 'Medico y usuario creados con exito en el sistema',         
+                id_medico: result
+            });
+             
     } catch (error) {
-        res.status(500).json({ mensaje: 'Error al guardar el medico', error: error.message});
+        return res.status(500).json({
+            mensaje: 'Error en el proceso de registro multiple del medico',
+         error: error.message});
     }
 };
 // Obtener medico por ID
@@ -42,8 +49,8 @@ exports.updateMedico = async (req, res) => {
         } else {
             res.status(404).json({ mensaje: 'Medico no encontrado' });
         }
-      } catch (err) {
-        res.status(500).json({ error: error.massage });
+      } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 };
 // Eliminar un medico
@@ -60,6 +67,19 @@ exports.deleteMedico = async (req, res) => {
           res.status(500).json({ error: error.message});
     }
 };    
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
